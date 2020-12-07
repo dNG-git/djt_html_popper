@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "es2018",
+        "lib": [ "dom", "es2018" ],
+        "module": "esnext",
+        "moduleResolution": "node",
+
+        "declaration": true,
+        "inlineSources": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "strict": true,
+        "strictNullChecks": false,
+        "sourceMap": true
+    },
+
+    "include": [ "./src/**/*" ]
+}
