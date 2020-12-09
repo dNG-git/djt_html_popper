@@ -35,6 +35,14 @@ export class VirtualEventElement<E extends Event = Event> implements VirtualElem
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     protected event: any;
     /**
+     * Scrolled from left value at DOM event
+     */
+    protected eventScrolledY: number;
+    /**
+     * Scrolled from top value at DOM event
+     */
+    protected eventScrolledX: number;
+    /**
      * Underlying DOM event
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,6 +57,9 @@ export class VirtualEventElement<E extends Event = Event> implements VirtualElem
      */
     constructor(event: E, preference: VirtualEventElementPreference = VirtualEventElementPreference.EVENT) {
         this.event = event;
+        this.eventScrolledY = (typeof self.scrollX == 'number' ? self.scrollX : self.pageXOffset);
+        this.eventScrolledX = (typeof self.scrollY == 'number' ? self.scrollY : self.pageYOffset);
+
         this.preference = preference;
     }
 
@@ -79,15 +90,25 @@ export class VirtualEventElement<E extends Event = Event> implements VirtualElem
         }
 
         if (!_return && typeof this.event.clientX == 'number') {
+            const x = (
+                (this.event.clientX as number)
+                + (this.eventScrolledY - (typeof self.scrollX == 'number' ? self.scrollX : self.pageXOffset))
+            );
+
+            const y = (
+                (this.event.clientY as number)
+                + (this.eventScrolledX - (typeof self.scrollY == 'number' ? self.scrollY : self.pageYOffset))
+            );
+
             _return = {
                 width: 0,
                 height: 0,
-                top: this.event.clientY,
-                left: this.event.clientX,
-                right: this.event.clientY,
-                bottom: this.event.clientX,
-                x: this.event.clientX,
-                y: this.event.clientY
+                top: y,
+                left: x,
+                right: y,
+                bottom: x,
+                x,
+                y
             };
         }
 

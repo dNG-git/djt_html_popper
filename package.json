@@ -3,7 +3,7 @@
     "license": "MPL-2.0",
     "description": "'djt-html-popper' extends Popper's core implementation to handle events and virtual elements easier.",
     "homepage": "https://www.direct-netware.de/redirect?djt;html;popper",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "repository": {
         "type": "git",
         "url": "https://github.com/dNG-git/djt_html_popper.git"
